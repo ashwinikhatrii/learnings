@@ -16,15 +16,18 @@ html{
 body{
     background-color: #1d1d1d;
 }
-main{
-    width: 100%;
+
+@mixin flex-column ($gap:0rem){
     display: flex;
     flex-direction: column;
+    gap: $gap;
+}
+main{
+    width: 100%;
+    @include flex-column(0rem);
     section{
         width: 100%;
-        gap: 1rem;
-        display: flex;
-        flex-direction: column;
+        @include flex-column(1rem);
         padding: 1rem;
 
     .top{
@@ -32,16 +35,75 @@ main{
 
         img{
             width: 100%;
-            border-radius: 10px;
+            border-radius: 0.7rem;
         }
     }
     .bottom{
-        background-color: #343434;
-        padding: 1rem;
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
+        background-color: #292929;
+        padding: 1.5rem;
+        border-radius: 0.7rem;
+        @include flex-column(3rem);
+
+        .text{
+           @include flex-column(0.7rem);
+
+            h1{
+                font-weight: 200;
+                font-size: 2.5rem;
+                text-transform: uppercase;
+            }
+            p{
+                font-weight: 300;
+                font-size: 1.5rem;
+                opacity: 0.6;
+                line-height: 1.5;
+            }
+            button{
+                width: fit-content;
+                border: none;
+                outline: none;
+                padding: 0.7rem 1rem;
+                border-radius: 0.5rem;
+            }
+        }
     }
+
+    }
+}
+
+section{
+    max-width: 2000px;
+}
+@media (min-width:900px){
+    main{
+        background-color: red;
+
+        section{
+            flex-direction: row;
+            padding: 1rem 4rem;
+
+           .top,
+            .bottom{
+                width: 50%;
+            }
+
+            .bottom{
+                justify-content: space-between;
+                padding: 3rem;
+
+                .text{
+                    gap: 1.5rem;
+                    h1{
+                        font-size: 3.5rem;
+
+                    }
+                    p{
+                        width: 60%;
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
 
     }
 }
